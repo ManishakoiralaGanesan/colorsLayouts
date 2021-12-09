@@ -5,7 +5,12 @@
       <h2>HEX CODE</h2>
 
       <form action="">
-        <input type="text" v-model="codeName" placeholder="Enter HEX Code" />
+        <input
+          type="text"
+          v-model="codeName"
+          placeholder="Enter HEX Code"
+          id="text"
+        />
         <br />
         <input type="submit" value="Add" @click="addColorcode" />
       </form>
@@ -58,7 +63,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-input[type="text"] {
+#text {
   padding: 16px;
   font-size: 16px;
   width: 400px;

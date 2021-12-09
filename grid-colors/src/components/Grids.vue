@@ -2,7 +2,7 @@
   <div>
     <div class="heading">
       <h1>COLORS GRID</h1>
-      <button v-on:click="addClick">+</button>
+      <button id="add-btn" v-on:click="addClick">+</button>
     </div>
     <div class="grids">
       <div
@@ -10,8 +10,14 @@
         v-for="layout in layouts"
         :key="layout.color"
         :style="backgroundColor(layout.color)"
+        @mouseover="hadnleClick()"
       >
-        {{ layout.display }}
+        <div id="txt-code">
+          <p>
+            {{ layout.color }}
+          </p>
+          <button id="copy" @click="copyText(layout.color)">copy</button>
+        </div>
       </div>
     </div>
 
@@ -29,14 +35,19 @@ export default {
   data() {
     return {
       isPopup: false,
-
+      text: "",
       layouts: [],
+      isoverlay: false,
     };
   },
   created() {
     // this.getColors();
   },
   methods: {
+    hadnleClick() {
+      this.isoverlay = true;
+    },
+
     backgroundColor(color) {
       return { "--bg-color": color };
     },
@@ -52,6 +63,12 @@ export default {
     close() {
       console.log("close");
       this.isPopup = false;
+    },
+    copyText(text) {
+      console.log(text);
+      navigator.clipboard.writeText(text);
+      this.isoverlay = false;
+      console.log(this.isoverlay);
     },
     /* getColors() {
       console.log("get");
@@ -72,7 +89,9 @@ export default {
 }
 .gd-layout {
   background-color: var(--bg-color);
-  padding: 60px;
+  padding: 40px;
+  display: inline-block;
+  cursor: pointer;
 }
 @media only screen and (max-width: 700px) {
   .grids {
@@ -93,11 +112,12 @@ export default {
   z-index: 2;
   cursor: pointer;
 }
+
 h1,
 button {
   display: inline-block;
 }
-button {
+#add-btn {
   font-size: 40px;
   width: 50px;
   float: right;
@@ -107,5 +127,31 @@ button {
   border: none;
   color: white;
   background-color: rgb(6, 111, 209);
+}
+#txt-field {
+  font-size: 20px;
+  width: 100px;
+  font-weight: bold;
+  border: none;
+}
+#txt-code {
+  width: 100%;
+  background-color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+#txt-code p,
+button {
+  display: inline-block;
+}
+
+#copy {
+  color: blue;
+  border: none;
+  background-color: white;
+  font-size: 17px;
+  float: right;
+  margin-top: 8%;
+  cursor: pointer;
 }
 </style>
