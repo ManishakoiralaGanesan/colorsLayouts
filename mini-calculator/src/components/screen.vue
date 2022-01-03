@@ -1,5 +1,5 @@
 <template>
-  <input type="text" v-model="value" id="num_value" />
+
 </template>
 <script>
 export default {};

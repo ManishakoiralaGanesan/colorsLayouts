@@ -96,7 +96,6 @@ export default {
     evaluateValue() {
       this.number = this.numValue;
       let tot = eval(this.numValue);
-
       this.total = tot;
       this.numValue = this.total;
     },
