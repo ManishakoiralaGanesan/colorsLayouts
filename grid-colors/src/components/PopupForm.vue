@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-//import store from "./../store";
+import store from "./../store";
 export default {
   props: {
     close: {
@@ -41,14 +41,14 @@ export default {
       } else {
         alert("Code is not valid");
       }
-      //   this.storeColors();
+      this.storeColors();
       this.close();
     },
-    /*storeColors() {
+    storeColors() {
       store.dispatch("storecolor", {
         color: this.codeName,
       });
-    },*/
+    },
   },
 };
 </script>

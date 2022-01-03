@@ -7,7 +7,7 @@
     <div class="grids">
       <div
         class="gd-layout"
-        v-for="layout in layouts"
+        v-for="layout in colors"
         :key="layout.color"
         :style="backgroundColor(layout.color)"
         @mouseover="hadnleClick()"
@@ -28,6 +28,9 @@
 </template>
 <script>
 import PopupForm from "./PopupForm.vue";
+import store from "./../store";
+import { mapState } from "vuex";
+
 export default {
   components: {
     PopupForm,
@@ -41,7 +44,11 @@ export default {
     };
   },
   created() {
-    // this.getColors();
+    this.getColors();
+    store.dispatch("setStateValueFromLocalStorage");
+  },
+  computed: {
+    ...mapState({ colors: "colors" }),
   },
   methods: {
     hadnleClick() {
@@ -70,13 +77,13 @@ export default {
       this.isoverlay = false;
       console.log(this.isoverlay);
     },
-    /* getColors() {
+    getColors() {
       console.log("get");
       let codes = JSON.parse(localStorage.getItem("colors"));
       codes.forEach((element) => {
         console.log(element);
       });
-    },*/
+    },
   },
 };
 </script>
@@ -86,6 +93,7 @@ export default {
   grid-template-columns: auto auto auto auto auto auto auto;
   column-gap: 10px;
   row-gap: 10px;
+  margin-top: 20px;
 }
 .gd-layout {
   background-color: var(--bg-color);
@@ -138,7 +146,7 @@ button {
   width: 100%;
   background-color: white;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
 }
 #txt-code p,
 button {
